@@ -1,16 +1,19 @@
 import { useState } from "react";
 import SearchBar from './Components/SearchBar';
+import memesData from "./memesData.js"
+
 
 export const App = () => {
 
   const GIPHY_API_KEY = "2cZkiFTqyiS79UdSapL6LHWlublpl7iy";
 
   const [memeGif, setMemeGif] = useState("");
-  const [query, setQuery] = useState("Type here");
+  const [randomMemeGif, setRandomMemeGif] = useState("");
+  const [query, setQuery] = useState("Keyboard");
 
-  const callGiphyAPI = (string) => {
+  const callGiphyAPI = (query) => {
     fetch(
-      `https://api.giphy.com/v1/gifs/search?q=${string}&api_key=${GIPHY_API_KEY}`
+      `https://api.giphy.com/v1/gifs/search?q=${query}&api_key=${GIPHY_API_KEY}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -20,28 +23,31 @@ export const App = () => {
       });
   };
 
-    callGiphyAPI(query);
+  callGiphyAPI(query);
+
+  const getRandomMeme = () => {
+    const memesArray = memesData.data.memes
+    const randomNumber = Math.floor(Math.random() * memesArray.length)
+    setRandomMemeGif(memesArray[randomNumber].url)
+  };
 
   return (
     <>
       <div>
-        <SearchBar setQuery={setQuery} />
+        <SearchBar className='header' setQuery={setQuery} />
+        <button
+            className="form--button"
+            onClick={getRandomMeme}
+            >
+              Get a random meme 🖼
+          </button>
       </div>
-      <div
-        className="App"
-        style={{ display: "flex", gap: "20px", alignItems: "center" }}
-      >
+      <div>
         <img
           className="meme--image"
-          src={memeGif}
+          src={randomMemeGif ? randomMemeGif : memeGif}
           alt="meme"
-          style={{
-            objectFit: "contain",
-            width: "500px",
-            heigth: "500px"
-          }}
         />
-        <h1>Your last before search: {query}</h1>
       </div>
     </>
   );
