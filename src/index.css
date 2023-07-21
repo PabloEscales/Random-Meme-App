@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #acacac;
 }
 
 code {
@@ -17,30 +18,23 @@ code {
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  width: 500px;
-  height: 85px;
-  background: linear-gradient(#A626D3, #A626D3);
+  width: 100%;
+  background: linear-gradient(#acacac, #acacac);
   color: white;
-  padding: 20px;
+  padding: 40px;
 }
 
 .meme--image {
-  border: solid 15px;
+  width: 100%;
+  gap: 32px;
   border-end-end-radius: 16px;
-  border-bottom-left-radius:  16px;
-  border-color: #A626D3;
   object-fit: contain;
-  width: 500px;
   height: 500px;
 }
 
 .form--button {
-  width: 500px;
-  height: 40px;
+  width: 100%;
   font-family: "Karla", sans-serif;
-  background: linear-gradient(#A626D3, #A626D3);
-  color: white;
   cursor: pointer;
+  margin: 20px;
 }
